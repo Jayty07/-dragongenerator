@@ -13,7 +13,9 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "next build && next start",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "foundry:build": "esbuild foundry-module/src/main.ts --bundle --format=esm --target=es2020 --tsconfig=foundry-module/tsconfig.json --outfile=foundry-module/scripts/module.js",
+    "foundry:typecheck": "tsc -p foundry-module/tsconfig.json"
   },
   "dependencies": {
     "@editorjs/code": "^2.8.0",
@@ -97,6 +99,7 @@
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.14",
+    "esbuild": "0.17.18",
     "eslint": "^8.39.0",
     "eslint-config-next": "13.0.0",
     "eslint-config-prettier": "^8.8.0",
