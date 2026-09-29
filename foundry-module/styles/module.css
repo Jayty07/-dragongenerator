@@ -1,0 +1,22 @@
+.wof-hatch-dragon {
+  flex: 1 1 100%;
+}
+
+.wof-dragon-hatch .wof-seed-row {
+  display: flex;
+  flex: 2;
+  gap: 4px;
+}
+
+.wof-dragon-hatch .wof-seed-row input {
+  flex: 1;
+}
+
+.wof-dragon-hatch .wof-seed-row button {
+  flex: 0 0 32px;
+}
+
+.wof-dragon-hatch .wof-preview {
+  margin: 0.5rem 0 0;
+  font-style: italic;
+}

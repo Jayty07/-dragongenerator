@@ -1,0 +1,52 @@
+name: Foundry module release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm foundry:typecheck
+
+      - run: pnpm foundry:build
+
+      - name: Stamp version and download URL
+        working-directory: foundry-module
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          VERSION="${TAG#v}"
+          jq --arg v "$VERSION" \
+            --arg d "https://github.com/$REPO/releases/download/$TAG/module.zip" \
+            '.version = $v | .download = $d' module.json > module.tmp.json
+          mv module.tmp.json module.json
+
+      - name: Package
+        working-directory: foundry-module
+        run: zip -r ../module.zip module.json scripts styles README.md
+
+      - name: Upload release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" \
+            module.zip foundry-module/module.json --clobber

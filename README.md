@@ -91,6 +91,16 @@ The code lives in `lib/dragon/`: tribe data in `tribes.ts`, the scaling engine i
 
 The actor targets the activity-based dnd5e data model (system 4.x and newer, Foundry v12+). Foundry migrates it automatically on import.
 
+### Foundry VTT module
+
+If you play in Foundry, you don't need the website. The `foundry-module/` folder packages the same generator as a Foundry module that adds a **Hatch Dragon** button to the Actors sidebar and creates the NPC actor directly. Install it with this manifest URL, which also works on Forge:
+
+```
+https://github.com/Jayty07/-dragongenerator/releases/latest/download/module.json
+```
+
+See [`foundry-module/README.md`](foundry-module/README.md) for usage, the macro API, and how to publish a release.
+
 ### Importing into Foundry VTT (and Forge VTT)
 
 Forge VTT hosts a standard Foundry server, so these steps are the same on Forge and on a self-hosted install:

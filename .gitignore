@@ -38,3 +38,6 @@ next-env.d.ts
 
 .vscode
 .contentlayer
+# foundry module build output
+foundry-module/scripts
+module.zip
